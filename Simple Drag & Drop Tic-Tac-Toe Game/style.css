@@ -1,0 +1,206 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    background: linear-gradient(to bottom, #1c1c1c, #000000, #2c2c2c);
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+}
+
+.title {
+    color: #ffffff;
+    position: absolute;
+    bottom: 90%;
+    font-size: xx-large;
+    text-align: center;
+    animation: titleAnimation 2s linear infinite;
+}
+
+@keyframes titleAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.board {
+    position: relative;
+    display: grid;
+    margin: 0 50px;
+    grid-template-columns: repeat(3, 1fr);
+    transform-style: preserve-3d;
+}
+
+.board .dropbox {
+    position: relative;
+    width: 130px;
+    height: 130px;
+    border-right: 4px solid #ff1493;
+    border-bottom: 4px solid #ff1493;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    animation: dropboxAnimation 2s linear infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes dropboxAnimation {
+    0% { background-color: rgba(255, 255, 255, 0.1); }
+    50% { background-color: rgba(255, 255, 255, 0.3); }
+    100% { background-color: rgba(255, 255, 255, 0.1); }
+}
+
+.board .dropbox:nth-child(3),
+.board .dropbox:nth-child(6),
+.board .dropbox:nth-child(9) {
+    border-right: none;
+}
+
+.board .dropbox:nth-child(7),
+.board .dropbox:nth-child(8),
+.board .dropbox:nth-child(9) {
+    border-bottom: none;
+}
+
+.board .dragbox div {
+    pointer-events: none;
+    scale: 1.5;
+}
+
+.drag_text{
+    color: yellowgreen;
+    font-size: x-large;
+
+}
+
+.cross {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    animation: crossAnimation 2s linear infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes crossAnimation {
+    0% { transform: rotateX(0) rotateY(0); }
+    100% { transform: rotateX(360deg) rotateY(360deg); }
+}
+
+.cross::before {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(45deg, #ffd700, #ff1493);
+    transform: rotate(45deg);
+    animation: crossBeforeAnimation 2s linear infinite;
+}
+
+@keyframes crossBeforeAnimation {
+    0% { height: 0; opacity: 0; }
+    50% { height: 100%; opacity: 1; }
+    100% { height: 100%; opacity: 0; }
+}
+
+.cross::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(45deg, #ffd700, #ff1493);
+    transform: rotate(45deg);
+    animation: crossAfterAnimation 2s linear infinite;
+}
+
+@keyframes crossAfterAnimation {
+    0% { width: 0; opacity: 0; }
+    50% { width: 100%; opacity: 1; }
+    100% { width: 100%; opacity: 0; }
+}
+
+.circle {
+    position: relative;
+    width: 50px;
+    height: 50px;
+    border: px solid #ffd700;
+    border-radius: 50%;
+    animation: circleAnimation 2s linear infinite;
+    transform-style: preserve-3d;
+    background: linear-gradient(45deg, #ffd700, #ff1493);
+}
+
+@keyframes circleAnimation {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+
+.drag {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 420px;
+    width: 100px;
+    gap: 10px;
+    margin: 0 40px;
+    cursor: grab;
+    animation: dragAnimation 2s linear infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes dragAnimation {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+.drag .dragbox {
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    transform-style: preserve-3d;
+}
+
+.reset {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 25px;
+    border: none;
+    border-radius: 50px;
+    outline: none;
+    font-size: 1.25em;
+    cursor: pointer;
+    background-color: #ffd700;
+    color: #000000;
+    animation: resetAnimation 2s linear infinite;
+    transform-style: preserve-3d;
+}
+
+@keyframes resetAnimation {
+    0% { background-color: #ffd700; }
+    50% { background-color: #ff1493; }
+    100% { background-color: #ffd700; }
+}
+
+.last{
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: large;
+}
